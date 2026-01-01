@@ -17,6 +17,9 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.1</junit.version>
+         <sonar.projectKey>calculator-app</sonar.projectKey>
+         <sonar.projectName>Calculator-app</sonar.projectName>
+
     </properties>
 
     <!-- Dependencies -->
