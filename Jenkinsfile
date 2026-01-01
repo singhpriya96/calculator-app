@@ -14,31 +14,24 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Test') {
             steps {
-                bat 'mvn clean compile'
+                bat 'mvn clean test'
             }
         }
 
-        stage('Test') {
+        stage('SonarQube Analysis') {
             steps {
-                bat 'mvn test'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                bat 'mvn package'
+                withSonarQubeEnv('SonarQube-Local') {
+                    bat 'mvn sonar:sonar'
+                }
             }
         }
     }
 
     post {
-        success {
-            echo 'Build successful 🎉'
-        }
-        failure {
-            echo 'Build failed ❌'
+        always {
+            junit '**/target/surefire-reports/*.xml'
         }
     }
 }
